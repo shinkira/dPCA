@@ -80,8 +80,8 @@ end
 numCompToShow = min(options.numCompToShow, size(W,2));
 
 X = Xfull(:,:)';
-Xcen = bsxfun(@minus, X, mean(X));
-XfullCen = bsxfun(@minus, Xfull, mean(X)');
+Xcen = bsxfun(@minus, X, nanmean(X));
+XfullCen = bsxfun(@minus, Xfull, nanmean(X)');
 N = size(X, 1);
 dataDim = size(Xfull);
 Z = Xcen * W;

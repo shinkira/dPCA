@@ -116,11 +116,13 @@ elseif ndims(data) == 4 && size(data,3)==2
 else
     % in all other cases pool all conditions and plot them in different
     % colours
+    % pick_condition = [2,3,5,8];
     data = squeeze(data);
     dims = size(data);
     data = permute(data, [numel(dims) 1:numel(dims)-1]);
     data = reshape(data, size(data,1), []);
     data = data';
+    % data = data(pick_condition,:);
     
     plot(time, data, 'LineWidth', 2)    
 end

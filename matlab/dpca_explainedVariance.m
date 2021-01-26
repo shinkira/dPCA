@@ -65,10 +65,17 @@ for pair = reshape(varargin,2,[])    % pair is {propName; propValue}
 	end
 end
 
+% replace NaN with zeros -- SK 21/01/26
+n_NaN = sum(isnan(Xfull(:)));
+fprintf('%d NaNs in Xfull were replaced by zero\n',n_NaN);
+Xfull(isnan(Xfull)) = 0;
+
 % centering
 X = Xfull(:,:);
-Xfull = bsxfun(@minus, Xfull, mean(X,2));
-X = bsxfun(@minus, X, mean(X,2));
+Xfull = bsxfun(@minus, Xfull, nanmean(X,2));
+X = bsxfun(@minus, X, nanmean(X,2));
+
+
 
 % marginalizing
 Xmargs = dpca_marginalize(Xfull, 'combinedParams', options.combinedParams, 'ifFlat', 'yes');
